@@ -151,6 +151,7 @@ body {
     background-color: #121212;
     border-radius: 15px;
     padding: 16px;
+    margin: 2px 0px 2px 8px;
 }
 
 .library {
@@ -221,4 +222,30 @@ body {
 
 .lan-select img {
     height: 30px;
+}
+
+.right_box {
+    width: 70vw;
+    height: 87vh;
+    background-color: #121212;
+    border-radius: 15px;
+    padding: 16px;
+    margin: 2px 8px 2px 0px;
+}
+
+.trendingSongs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 600px;
+}
+
+.card {
+    width: 143px;
+    padding: 10px;
+}
+
+.card img {
+    width: 100%;
+    object-fit: contain;
 }
