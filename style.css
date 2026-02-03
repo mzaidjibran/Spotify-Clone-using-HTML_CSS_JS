@@ -226,11 +226,17 @@ body {
 
 .right_box {
     width: 70vw;
-    height: 87vh;
+    height: 100%;
     background-color: #121212;
     border-radius: 15px;
     padding: 16px;
     margin: 2px 8px 2px 0px;
+}
+
+.cardContainer {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .trendingSongs {
@@ -241,11 +247,41 @@ body {
 }
 
 .card {
+    position: relative;
     width: 143px;
     padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(41, 40, 40);
+}
+
+.card>* {
+    padding-top: 10px;
 }
 
 .card img {
     width: 100%;
     object-fit: contain;
+    border-radius: 8px;
+    cursor: pointer;
+
+}
+
+.spotifyPlay {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 84px;
+    right: 12px;
+    opacity: 0;
+    cursor: pointer;
+    transition: transform .2s ease-out, opacity .2s ease-out;
+}
+
+.card:hover .spotifyPlay {
+    opacity: 1;
+    transform: scale(1.08);
+
 }
