@@ -22,6 +22,7 @@ body {
     justify-content: space-between;
     height: 64px;
     padding: 10px 20px;
+    background-color: #302f2f;
 }
 
 .left {
@@ -249,6 +250,7 @@ body {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+    overflow-y: auto;
 }
 
 .trendingSongs {
@@ -267,7 +269,7 @@ body {
     transition: all 2s;
 }
 
-.card:hover{
+.card:hover {
     background-color: black;
 }
 
@@ -312,6 +314,7 @@ body {
     border-radius: 5px;
     background: #ba9f9f;
     z-index: 200;
+
 }
 
 .abovebar {
@@ -480,31 +483,6 @@ body {
 
 /* Mobile only */
 @media (max-width: 600px) {
-
-    .header {
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
-    .left {
-        gap: 15px;
-    }
-
-    .center {
-        order: 3;
-        width: 100%;
-    }
-
-    .search-box {
-        width: 100%;
-        height: 44px;
-    }
-
-    .right {
-        display: none;
-    }
-
-
 
     .hamburger {
         display: block;

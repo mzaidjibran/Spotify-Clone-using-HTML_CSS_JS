@@ -1,5 +1,8 @@
 console.log("Let's write some JavaScript");
 
+let songs = [];
+let currFolder;
+
 let currentSongs = new Audio();
 
 function secondsToMinutesSeconds(seconds) {
@@ -16,14 +19,16 @@ function secondsToMinutesSeconds(seconds) {
     return `${formattedMinutes}:${formattedSeconds}`;
 }
 
-async function getSongs() {
-    let a = await fetch("/songs/")
+async function getSongs(folder) {
+    currFolder = folder;
+    let a = await fetch(`/${folder}/`)
     let response = await a.text();
 
     let div = document.createElement("div")
     div.innerHTML = response;
+
     let as = div.getElementsByTagName("a")
-    let songs = []
+
     for (let index = 0; index < as.length; index++) {
         const element = as[index];
 
@@ -39,7 +44,7 @@ getSongs()
 
 const playMusic = (track, pause = false) => {
     // let audio = new Audio("/songs/" + track)
-    currentSongs.src = "/songs/" + track
+    currentSongs.src = `/${currFolder}/` + track
     if (!pause) {
         currentSongs.play()
         play.src = "pause.svg"
@@ -52,11 +57,9 @@ const playMusic = (track, pause = false) => {
 
 async function main() {
 
-
-
-
     // Get the list of songs.
-    let songs = await getSongs()
+
+    songs = await getSongs("songs/cs")
     playMusic(songs[0], true)
 
 
@@ -104,7 +107,7 @@ async function main() {
 
     currentSongs.addEventListener("timeupdate", () => {
         console.log(currentSongs.currentTime, currentSongs.duration);
-        document.querySelector(".songTime").innerHTML = `${secondsToMinutesSeconds(currentSongs.currentTime)}/${secondsToMinutesSeconds(currentSongs.duration)}`
+        document.querySelector(".songTime").innerHTML = `${secondsToMinutesSeconds(currentSongs.currentTime)} / ${secondsToMinutesSeconds(currentSongs.duration)}`
         document.querySelector(".circle").style.left = (currentSongs.currentTime / currentSongs.duration) * 100 + "%";
     })
 
@@ -143,7 +146,9 @@ async function main() {
 
     previous.addEventListener("click", () => {
         console.log(currentSongs)
-        let index = songs.indexOf(currentSongs.src.split("/").slice(-1)[0])
+        let currentFile = decodeURIComponent(currentSongs.src.split("/").pop());
+        let index = songs.indexOf(currentFile);
+
         if ((index - 1) >= 0) {
             playMusic(songs[index - 1])
         }
@@ -151,11 +156,16 @@ async function main() {
 
     next.addEventListener("click", () => {
         console.log(currentSongs)
-        let index = songs.indexOf(currentSongs.src.split("/").slice(-1)[0])
+        let currentFile = decodeURIComponent(currentSongs.src.split("/").pop());
+        let index = songs.indexOf(currentFile);
+
         if ((index + 1) < songs.length) {
             playMusic(songs[index + 1])
         }
-    });
+
+    }
+
+    );
 
 
 }
